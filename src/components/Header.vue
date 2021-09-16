@@ -119,7 +119,7 @@ export default {
             }else {
                 btnNext.classList.remove('btn-active')
             }
-            imagesPosts[0].classList.remove('show')
+            slideContent.querySelector('.show').classList.remove('show')
             imagesPosts[slide].classList.add('show')
         }
     }

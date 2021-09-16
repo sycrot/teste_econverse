@@ -3,15 +3,28 @@
         <footer class="footer-container">
         <div class="comments-container">
             <div class="cc-actions">
-                <i class="fa fa-chevron-left"></i>
-                <i class="fa fa-chevron-right"></i>
+                <i class="btn-prev fa fa-chevron-left"></i>
+                <i class="btn-next fa fa-chevron-right"></i>
             </div>
-            <div class="cc-user">
-                <img src="../assets/images/perfil-img.jpg" alt="User">
-                <p class="user-name">Felipe Salmim<small>Designer</small></p>
-            </div>
-            <div class="cc-comment-content">
-                <p class="comment-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae doloremque dolorem distinctio suscipit, adipisci quisquam laudantium repellat veniam natus, inventore iste saepe quod molestias! Aliquid architecto natus in vitae dolorem.</p>
+            <div class="cc-posts">
+                <div class="cc-post-content">
+                    <div class="cc-user">
+                        <img src="../assets/images/perfil-img.jpg" alt="User">
+                        <p class="user-name">Felipe Salmim<small>Designer</small></p>
+                    </div>
+                    <div class="cc-comment-content">
+                        <p class="comment-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae doloremque dolorem distinctio suscipit, adipisci quisquam laudantium repellat veniam natus, inventore iste saepe quod molestias! Aliquid architecto natus in vitae dolorem.</p>
+                    </div>
+                </div>
+                <div class="cc-post-content">
+                    <div class="cc-user">
+                        <img src="../assets/images/bateria-opt.jpg" alt="User">
+                        <p class="user-name">Felipe Salmim<small>Designer</small></p>
+                    </div>
+                    <div class="cc-comment-content">
+                        <p class="comment-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae doloremque dolorem distinctio suscipit, adipisci quisquam laudantium repellat veniam natus, inventore iste saepe quod molestias! Aliquid architecto natus in vitae dolorem.</p>
+                    </div>
+                </div>  
             </div>
         </div>
         <div class="footer-content">
@@ -84,7 +97,69 @@
 
 <script>
 export default {
+    mounted() {
+        const commentsPosts = document.querySelectorAll('.cc-post-content')
+        const commentsContentPosts = document.querySelector('.cc-posts')
+        const btnPrevCC = document.querySelector('.cc-actions .btn-prev')
+        const btnNextCC = document.querySelector('.cc-actions .btn-next')
 
+
+        let currentCC = 0
+
+        init()
+        function init() {
+            var _showCC = commentsContentPosts.querySelectorAll('.showCC')
+
+            Array.prototype.forEach.call(_showCC, sh => {
+                sh.classList.remove('showCC')
+            })
+            commentsPosts[0].classList.add('showCC')
+            btnPrevCC.classList.remove('btn-active')
+            btnPrevCC.classList.remove('btn-active')
+
+            if (commentsPosts[0]) {
+                btnPrevCC.classList.add('btn-active')
+            } else {
+                btnPrevCC.classList.remove('btn-active')
+            }
+        }
+
+        addListeners()
+
+        function addListeners() {
+            btnNextCC.addEventListener('click', showCCNext)
+            btnPrevCC.addEventListener('click', showCCPrev)
+        }
+
+        function showCCNext() {
+            currentCC++
+            showCCSlide()
+        }
+
+        function showCCPrev() {
+            currentCC--
+            showCCSlide()
+        }
+
+        function showCCSlide() {
+            let qtd = commentsPosts.length
+            let slide = currentCC % qtd
+            slide = Math.abs(slide)
+
+            if (commentsPosts[slide] == commentsPosts[0]) {
+                btnPrevCC.classList.add('btn-active')
+            } else {
+                btnPrevCC.classList.remove('btn-active')
+            }
+            if (commentsPosts[slide] == commentsPosts[qtd-=1]) {
+                btnNextCC.classList.add('btn-active')
+            }else {
+                btnNextCC.classList.remove('btn-active')
+            }
+            commentsContentPosts.querySelector('.showCC').classList.remove('showCC')
+            commentsPosts[slide].classList.add('showCC')
+        }
+    }
 }
 </script>
 
@@ -97,24 +172,37 @@ export default {
 .comments-container {
     width: 1002px;
     height: 175px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background: #f7f7f7;
+    display: flex;
+    justify-content: center;
     box-shadow: 0px 3px 6px rgba(0,0,0,0.25);
     border-radius: 5px;
     margin-bottom: -45px;
     z-index: 10;
 }
+.cc-posts {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.cc-post-content {
+    width: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+.showCC{
+    display: flex;
+}
 .comments-container .cc-actions {
     width: 900px;
     height: 175px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     position: absolute;
     color: #707070;
     font-size: 16px;
+    z-index: 10;
 }
 .comments-container .cc-actions i {
     cursor: pointer;
