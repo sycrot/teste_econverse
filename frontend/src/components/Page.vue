@@ -28,20 +28,22 @@
                 <p class="hg-t-description">it is a long established fact that a reader will be destracted by the readable</p>
             </div>
             <div class="hgs-content">
-                <div class="hgs-post" v-for="(item, key) in products" :key="key" v-on:click="postClick(item)">
-                    <div class="hgs-image-animate">
-                        <img :src="item.photo" alt="">
-                        <div class="hgs-img-quickview">
-                            <i class="fa fa-search"></i>
-                            <p>Quick view</p>
+                <div class="hgs-div-content" v-for="(item, i) in products" :key="i" v-on:click="postClick(item)">
+                    <div class="hgs-post" v-if="i <= limitationList">
+                        <div class="hgs-image-animate">
+                            <img :src="item.photo" alt="">
+                            <div class="hgs-img-quickview">
+                                <i class="fa fa-search"></i>
+                                <p>Quick view</p>
+                            </div>
                         </div>
+                        <p class="hgs-post-title">{{item.productName}}</p>
+                        <p class="hgs-post-description">{{item.descriptionShort}}</p>
+                        <p class="hgs-post-price">R$ {{parseFloat(item.price).toFixed(2).replace('.',',').replace(/(\d)(?=(\d{3})+\,)/g, '$1.')}}</p>
                     </div>
-                    <p class="hgs-post-title">{{item.productName}}</p>
-                    <p class="hgs-post-description">{{item.descriptionShort}}</p>
-                    <p class="hgs-post-price">R$ {{parseFloat(item.price).toFixed(2).replace('.',',').replace(/(\d)(?=(\d{3})+\,)/g, '$1.')}}</p>
                 </div>
             </div>
-            <button class="btn-view-more">Ver mais</button>
+            <button class="btn-view-more" v-on:click="clickViewMore()">Ver mais</button>
         </div>
 
         <div class="best-brands-container">
@@ -70,6 +72,7 @@
 import axios from 'axios'
 
 export default {
+    name: 'page',
     data: function() {
         return {
             products: [],
@@ -77,6 +80,7 @@ export default {
             imageProduct: '',
             descriptionProduct: '',
             priceProduct: '',
+            limitationList: 3
         }
     },
     created: function() {
@@ -97,6 +101,13 @@ export default {
         closeProductContainerPage() {
             const productContainerPage = document.querySelector('.product-container-page')
             productContainerPage.classList.remove('product-container-page-open')
+        },
+        clickViewMore() {
+            //const containerPosts = document.querySelector('.hgs-content')
+            let limit = this.limitationList >= this.products.length
+            if (!limit) {
+                this.limitationList += 4
+            }
         }
     }
 }
@@ -142,13 +153,13 @@ export default {
 .hgs-post {
     width: 218px;
     height: 400px;
+    display: block;
     padding: 2vmax 0.5vmax;
     box-sizing: border-box;
     margin: 3vmax;
     cursor: pointer;
     border-radius: 8px;
     transition: box-shadow 200ms ease-in;
-
 }
 .hgs-image-animate {
     height: 240px;
@@ -199,7 +210,7 @@ export default {
     background-color: #041E50;
 }
 .show-post-container {
-    display: block;
+    display: block !important;
 }
 .hgs-post .hgs-post-title {
     font-size: 15px;
@@ -297,12 +308,14 @@ export default {
     border-radius: 15px;
 }
 .pcg-image-product img{
-    width: 329px;
+    width: auto;
+    height: 262px;
 }
 .pcg-product-information {
     text-align: left;
     display: flex;
     flex-direction: column;
+    margin-left: 2vmax;
 }
 .pcg-title-product {
     font-size: 20px;

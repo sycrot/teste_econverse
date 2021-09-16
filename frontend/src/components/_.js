@@ -1,4 +1,4 @@
-function mounted() {
+
     const itemsHighlights = document.querySelectorAll('.hgs-post')
     const btnViewMore = document.querySelector('.btn-view-more')
     let divItems = []
@@ -46,4 +46,3 @@ function mounted() {
             generateItemsQuantity(itemsHighlights, pageActual)
         })
     }
-}
