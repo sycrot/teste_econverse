@@ -1,5 +1,5 @@
 <template>
-    <div class="header">
+    <div id="header">
         <div class="nav-info">
             <ul class="nav-info-ul">
                 <li>Compra 100%</li>
@@ -40,8 +40,8 @@
 
         <div class="slideshow-container">
             <div class="slideshow-actions">
-                <i class="fa fa-chevron-left"></i>
-                <i class="fa fa-chevron-right"></i>
+                <i class="btn-prev fa fa-chevron-left"></i>
+                <i class="btn-next fa fa-chevron-right"></i>
                 <ul class="act-navigation">
                     <li class="nvg-btn"></li>
                     <li class="nvg-btn nvg-btn-active"></li>
@@ -49,35 +49,11 @@
                 </ul>
             </div>
             <div class="slide-content">
-                <img src="../assets/images/musical-background-2886886_1920.jpg" alt="" class="slide-image-bg">
-            </div>
-        </div>
-
-        <div class="options-department">
-            <div class="departments-container">
-                <div class="department">
-                    <img src="../assets/images/guitarra-opt.jpg" alt="Guitarra">
-                    <p>Guitarras</p>
+                <div class="slide-post-content">
+                    <img src="../assets/images/musical-background-2886886_1920.jpg" alt="" class="slide-image-bg">
                 </div>
-                <div class="department">
-                    <img src="../assets/images/microfone-opt.jpg" alt="Microfone">
-                    <p>Microfones</p>
-                </div>
-                <div class="department">
-                    <img src="../assets/images/mesadesom-opt.jpg" alt="Mesa de Som">
-                    <p>Mesa de som</p>
-                </div>
-                <div class="department">
-                    <img src="../assets/images/teclado-opt.jpg" alt="Teclado">
-                    <p>Teclados</p>
-                </div>
-                <div class="department">
-                    <img src="../assets/images/violao-opt.jpg" alt="Violao">
-                    <p>Violão</p>
-                </div>
-                <div class="department">
-                    <img src="../assets/images/bateria-opt.jpg" alt="Bateria">
-                    <p>Baterias</p>
+                <div class="slide-post-content">
+                    <img src="../assets/images/musician-349790_1920.jpg" alt="" class="slide-image-bg">
                 </div>
             </div>
         </div>
@@ -86,7 +62,67 @@
 
 <script>
 export default {
+    mounted() {
+        const imagesPosts = document.querySelectorAll('.slide-post-content')
+        const slideContent = document.querySelector('.slide-content')
+        const btnPrev = document.querySelector('.btn-prev')
+        const btnNext = document.querySelector('.btn-next')
+        let current = 0
 
+        init()
+        function init() {
+        var _show = slideContent.querySelectorAll('.show')
+
+        Array.prototype.forEach.call(_show, sh => {
+            sh.classList.remove('show')
+        })
+        imagesPosts[0].classList.add('show')
+        btnPrev.classList.remove('btn-active')
+        btnPrev.classList.remove('btn-active')
+
+        if (imagesPosts[0]) {
+            btnPrev.classList.add('btn-active')
+        } else {
+            btnPrev.classList.remove('btn-active')
+        }
+        }
+
+        addListeners()
+
+        function addListeners() {
+            btnNext.addEventListener('click', showNext)
+            btnPrev.addEventListener('click', showPrev)
+        }
+
+        function showNext() {
+            current++
+            showSlide()
+        }
+
+        function showPrev() {
+            current--
+            showSlide()
+        }
+
+        function showSlide() {
+            let qtd = imagesPosts.length
+            let slide = current % qtd
+            slide = Math.abs(slide)
+
+            if (imagesPosts[slide] == imagesPosts[0]) {
+                btnPrev.classList.add('btn-active')
+            } else {
+                btnPrev.classList.remove('btn-active')
+            }
+            if (imagesPosts[slide] == imagesPosts[qtd-=1]) {
+                btnNext.classList.add('btn-active')
+            }else {
+                btnNext.classList.remove('btn-active')
+            }
+            imagesPosts[0].classList.remove('show')
+            imagesPosts[slide].classList.add('show')
+        }
+    }
 }
 </script>
 
@@ -243,12 +279,17 @@ export default {
 .slide-image-bg {
     width: 100%;
 }
+.slide-post-content {
+    display: none;
+}
+.show {
+    display: block;
+}
 .slideshow-actions {
     width: 97%;
     height: 504px;
     display: flex;
     position: absolute;
-    justify-content: space-between;
     align-items: center;
 }
 .slideshow-actions i {
@@ -256,6 +297,18 @@ export default {
     color: #fff;
     cursor: pointer;
 }
+.btn-prev {
+    position: absolute;
+    left: 0;
+}
+.btn-next {
+    position: absolute;
+    right: 0;
+}
+.btn-active {
+    display: none;
+}
+
 .act-navigation {
     width: 100%;
     display: flex;
@@ -275,34 +328,5 @@ export default {
 }
 .act-navigation .nvg-btn .nvg-btn-active {
     background: #fff;
-}
-
-.options-department {
-    width: 100%;
-    height: 170px;
-    display: flex;
-    justify-content: center;
-}
-.departments-container {
-    display: flex;
-    width: 85%;
-    justify-content: space-between;
-    align-items: center;
-}
-.department {
-    text-align: center;
-}
-.department p {
-    text-transform: uppercase;
-    color: #000;
-    font-weight: bold;
-    font-size: 14px;
-    margin-top: 1vmax;
-}
-.options-department .department img {
-    width: 106px;
-    height: 106px;
-    border-radius: 50%;
-    filter: contrast(30%);
 }
 </style>

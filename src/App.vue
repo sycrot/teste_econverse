@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Header/>
+    <Advert/>
     <Page/>
     <Footer/>
   </div>
@@ -10,11 +11,13 @@
 import Header from './components/Header'
 import Page from './components/Page'
 import Footer from './components/Footer'
+import Advert from './components/Advert'
 
 export default {
   name: 'App',
   components: {
     Header,
+    Advert,
     Page,
     Footer
   }
