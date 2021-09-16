@@ -1,46 +1,44 @@
 <template>
     <div class="page">
+        <div class="product-container-page">
+            <div class="pcg-content">
+                <div class="btn-close-content">
+                    <i class="pcg-btn-close fa fa-times" v-on:click="closeProductContainerPage()"></i>
+                </div>
+                <div class="pcg-info-content">
+                    <div class="pcg-image-product">
+                        <img :src="this.imageProduct" alt="Image Product">
+                    </div>
+                    <div class="pcg-product-information">
+                        <h1 class="pcg-title-product">{{this.titleProduct}}</h1>
+                        <h1 class="pcg-price-product"><strong>R$ {{parseFloat(this.priceProduct).toFixed(2).replace('.',',').replace(/(\d)(?=(\d{3})+\,)/g, '$1.')}}</strong></h1>
+                        <p class="pcg-description-product">
+                            {{this.descriptionProduct}}
+                        </p>
+                        <a href="#">Veja mais detalhes do produto ></a>
+                        <button class="pcg-add-to-cart">Adicionar ao carrinho</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="highlights-container">
             <div class="title-sb">
                 <h1 class="hg-title">Instrumentos <strong>Destaque</strong></h1>
                 <p class="hg-t-description">it is a long established fact that a reader will be destracted by the readable</p>
             </div>
             <div class="hgs-content">
-                <div class="hgs-post">
-                    <img src="../assets/images/bateria-el-post.jpg" alt="">
-                    <p class="hgs-post-title">Bateria eletrônica</p>
-                    <p class="hgs-post-description">Many desktop publishing packages and web page editors now</p>
-                    <p class="hgs-post-price">R$ 1499,90</p>
-                </div>
-                <div class="hgs-post">
-                    <img src="../assets/images/bateria-el-post.jpg" alt="">
-                    <p class="hgs-post-title">Bateria eletrônica</p>
-                    <p class="hgs-post-description">Many desktop publishing packages and web page editors now</p>
-                    <p class="hgs-post-price">R$ 1499,90</p>
-                </div>
-                <div class="hgs-post">
-                    <img src="../assets/images/bateria-el-post.jpg" alt="">
-                    <p class="hgs-post-title">Bateria eletrônica</p>
-                    <p class="hgs-post-description">Many desktop publishing packages and web page editors now</p>
-                    <p class="hgs-post-price">R$ 1499,90</p>
-                </div>
-                <div class="hgs-post">
-                    <img src="../assets/images/bateria-el-post.jpg" alt="">
-                    <p class="hgs-post-title">Bateria eletrônica</p>
-                    <p class="hgs-post-description">Many desktop publishing packages and web page editors now</p>
-                    <p class="hgs-post-price">R$ 1499,90</p>
-                </div>
-                <div class="hgs-post">
-                    <img src="../assets/images/bateria-el-post.jpg" alt="">
-                    <p class="hgs-post-title">Bateria eletrônica</p>
-                    <p class="hgs-post-description">Many desktop publishing packages and web page editors now</p>
-                    <p class="hgs-post-price">R$ 1499,90</p>
-                </div>
-                <div class="hgs-post">
-                    <img src="../assets/images/bateria-el-post.jpg" alt="">
-                    <p class="hgs-post-title">Bateria eletrônica</p>
-                    <p class="hgs-post-description">Many desktop publishing packages and web page editors now</p>
-                    <p class="hgs-post-price">R$ 1499,90</p>
+                <div class="hgs-post" v-for="(item, key) in products" :key="key" v-on:click="postClick(item)">
+                    <div class="hgs-image-animate">
+                        <img :src="item.photo" alt="">
+                        <div class="hgs-img-quickview">
+                            <i class="fa fa-search"></i>
+                            <p>Quick view</p>
+                        </div>
+                    </div>
+                    <p class="hgs-post-title">{{item.productName}}</p>
+                    <p class="hgs-post-description">{{item.descriptionShort}}</p>
+                    <p class="hgs-post-price">R$ {{parseFloat(item.price).toFixed(2).replace('.',',').replace(/(\d)(?=(\d{3})+\,)/g, '$1.')}}</p>
                 </div>
             </div>
             <button class="btn-view-more">Ver mais</button>
@@ -69,8 +67,38 @@
 </template>
 
 <script>
-export default {
+import axios from 'axios'
 
+export default {
+    data: function() {
+        return {
+            products: [],
+            titleProduct: '',
+            imageProduct: '',
+            descriptionProduct: '',
+            priceProduct: '',
+        }
+    },
+    created: function() {
+        axios.get('http://localhost:3001/products')
+            .then(res => {
+                this.products = res.data
+            })
+    },
+    methods: {
+        postClick(item) {
+            this.titleProduct = item.productName
+            this.imageProduct = item.photo
+            this.descriptionProduct = item.descriptionShort
+            this.priceProduct = item.price
+            const productContainerPage = document.querySelector('.product-container-page')
+            productContainerPage.classList.add('product-container-page-open')
+        },
+        closeProductContainerPage() {
+            const productContainerPage = document.querySelector('.product-container-page')
+            productContainerPage.classList.remove('product-container-page-open')
+        }
+    }
 }
 </script>
 
@@ -113,12 +141,65 @@ export default {
 }
 .hgs-post {
     width: 218px;
-    height: 348px;
+    height: 400px;
+    padding: 2vmax 0.5vmax;
     box-sizing: border-box;
     margin: 3vmax;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: box-shadow 200ms ease-in;
+
 }
-.hgs-post img {
+.hgs-image-animate {
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.hgs-image-animate img {
     width: 100%;
+    transition: margin-top 200ms ease-in;
+}
+.hgs-post:hover {
+    box-shadow: 5px 5px 11px rgba(0, 0, 0,0.2);
+}
+.hgs-post:hover .hgs-image-animate img {
+    margin-top: -10px;
+}   
+.hgs-post:hover .hgs-img-quickview {
+    display: flex;
+    opacity: 1;
+}
+.hgs-post .hgs-img-quickview {
+    width: 217px;
+    display: none;
+    opacity: 0;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    box-shadow: 0 -30px 15px #ffffff94;
+    margin-top: 165px;
+    background-color: #ffffff94;
+    transition: opacity 200ms ease-in;
+}
+.hgs-post .hgs-img-quickview p{
+    font-weight: bold;
+    font-size: 13px;
+    color: #041E50;
+    margin-top: 5px;
+}
+.hgs-image-animate i{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background-color: #041E50;
+}
+.show-post-container {
+    display: block;
 }
 .hgs-post .hgs-post-title {
     font-size: 15px;
@@ -188,5 +269,95 @@ export default {
     font-family: 'Poppins', sans-serif;
     font-weight: 300;
     line-height: 19px;
+}
+
+.product-container-page {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background: rgba(34, 34, 34, 0.795);
+}
+.product-container-page-open {
+    display: flex;
+}
+.pcg-info-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pcg-content {
+    width: 769px;
+    height: 355px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 15px;
+}
+.pcg-image-product img{
+    width: 329px;
+}
+.pcg-product-information {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+.pcg-title-product {
+    font-size: 20px;
+    color: #041E50;
+    font-weight: normal;
+    letter-spacing: 0.05em;
+    margin-bottom: 25px;
+}
+.pcg-price-product {
+    font-size: 20px;
+    font-weight: 900;
+    color: #041E50;
+    letter-spacing: 0.05em;
+    margin-bottom: 25px;
+}
+.pcg-description-product {
+    width: 290px;
+    font-size: 10px;
+    line-height: 150.5%;
+    font-weight: normal;
+    letter-spacing: 0.05em;
+    color: #222222;
+    margin-bottom: 25px;
+}
+.pcg-product-information a {
+    font-size: 12px;
+    font-weight: normal;
+    letter-spacing: 0.05em;
+    color: #041E50;
+    text-decoration-line: line;
+    margin-bottom: 25px;
+}
+.pcg-add-to-cart {
+    width: 164px;
+    height: 40px;
+    background: #041E50;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn-close-content {
+    width: 90%;
+    margin-top: -25px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+.btn-close-content i {
+    font-size: 22px;
+    cursor: pointer;
 }
 </style>
