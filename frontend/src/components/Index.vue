@@ -2,7 +2,7 @@
 <div id="index">
     <Header />
     <Advert />
-    <Page />
+    <Page class="index-page"/>
     <Footer />
 </div>
 </template>
@@ -24,5 +24,7 @@ export default {
 </script>
 
 <style>
-
+.index-page {
+    box-sizing: content-box;
+}
 </style>

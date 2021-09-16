@@ -1,6 +1,6 @@
 <template>
-    <div class="page">
-        <div class="product-container-page">
+    <div id="page">
+        <div class="product-container-page" style="top: 0; position: fixed; z-index: 11; height: 100vh;">
             <div class="pcg-content">
                 <div class="btn-close-content">
                     <i class="pcg-btn-close fa fa-times" v-on:click="closeProductContainerPage()"></i>
@@ -273,12 +273,9 @@ export default {
 
 .product-container-page {
     width: 100%;
-    height: 100%;
-    position: fixed;
     display: none;
     justify-content: center;
     align-items: center;
-    position: absolute;
     background: rgba(34, 34, 34, 0.795);
 }
 .product-container-page-open {

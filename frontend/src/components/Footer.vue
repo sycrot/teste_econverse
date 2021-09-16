@@ -190,9 +190,12 @@ export default {
     display: none;
     align-items: center;
     justify-content: center;
+    opacity: 0;
+    transition: opacity 200ms ease-in;
 }
 .showCC{
     display: flex;
+    opacity: 1;
 }
 .comments-container .cc-actions {
     width: 900px;
