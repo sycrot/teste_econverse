@@ -28,7 +28,7 @@
             </div>
         </div>
     </div>
-    <div class="ad-content">
+    <div class="ad-contents">
         <div class="ad-container">
             <div class="ad-container-info">
                 <small>Novidades</small>
@@ -60,12 +60,12 @@ export default {
 </script>
 
 <style>
-.ad-content {
+.ad-contents {
     width: 100%;
     height: 386px;
     display: flex;
 }
-.ad-content .ad-container {
+.ad-contents .ad-container {
     width: 50%;
     height: 386px;
     box-sizing: border-box;

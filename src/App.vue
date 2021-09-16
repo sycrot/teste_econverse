@@ -1,25 +1,16 @@
 <template>
   <div id="app">
-    <Header/>
-    <Advert/>
-    <Page/>
-    <Footer/>
+    <Index/>
   </div>
 </template>
 
 <script>
-import Header from './components/Header'
-import Page from './components/Page'
-import Footer from './components/Footer'
-import Advert from './components/Advert'
+import Index from './components/Index'
 
 export default {
   name: 'App',
   components: {
-    Header,
-    Advert,
-    Page,
-    Footer
+    Index
   }
 }
 </script>
