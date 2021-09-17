@@ -29,7 +29,7 @@
             </div>
             <div class="hgs-content">
                 <div class="hgs-div-content" v-for="(item, i) in products" :key="i" v-on:click="postClick(item)">
-                    <div class="hgs-post" v-if="i <= limitationList">
+                    <div class="hgs-post" v-if="i < limitationList">
                         <div class="hgs-image-animate">
                             <img :src="item.photo" alt="">
                             <div class="hgs-img-quickview">
@@ -80,7 +80,7 @@ export default {
             imageProduct: '',
             descriptionProduct: '',
             priceProduct: '',
-            limitationList: 3
+            limitationList: 4
         }
     },
     created: function() {
@@ -103,10 +103,12 @@ export default {
             productContainerPage.classList.remove('product-container-page-open')
         },
         clickViewMore() {
-            //const containerPosts = document.querySelector('.hgs-content')
+            const btnViewMore = document.querySelector('.btn-view-more')
+
             let limit = this.limitationList >= this.products.length
             if (!limit) {
                 this.limitationList += 4
+                if (this.limitationList == this.products.length) btnViewMore.style.display = 'none'
             }
         }
     }
