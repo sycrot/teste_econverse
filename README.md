@@ -2,25 +2,25 @@
 
 ### Para compilar e testar o projeto o backend e frontend devem estar rodando juntos
 #### O backend roda na porta 3001 e o frontend na porta 8080 
-## Instalar dependencias e rodar backend
+## Instalar dependencias e compilar backend
 ```
 cd backend
 ```
 ```
 npm install
 ```
-### Rodar o backend
+### Compilar o backend
 ```
 npm start
 ```
-## Instalar dependencias e rodar frontend
+## Instalar dependencias e compilar frontend
 ```
 cd frontend
 ```
 ```
 npm install
 ```
-### Rodar o frontend
+### Compilar o frontend
 ```
 npm run serve
 ```

@@ -111,7 +111,6 @@ export default {
                 actNavigation.appendChild(nvgBtn)
             }
             const nvgBtnIdent = document.querySelectorAll('.nvg-btn')
-
             nvgBtnIdent[0].classList.add('nvg-btn-active')
         }
 
