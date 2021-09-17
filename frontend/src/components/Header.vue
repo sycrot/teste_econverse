@@ -410,7 +410,6 @@ export default {
     border-radius: 50%;
     list-style: none;
     margin: 0 0.5vmax;
-    cursor: pointer;
 }
 .act-navigation .nvg-btn-active {
     background-color: #fff;
