@@ -183,18 +183,21 @@ export default {
 .cc-posts {
     width: 100%;
     display: flex;
+    position: relative;
     align-items: center;
 }
-.cc-post-content {
+.cc-posts .cc-post-content {
     width: 100%;
-    display: none;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 200ms ease-in;
-}
-.showCC{
     display: flex;
+    left: 0;
+    position: absolute;
+    transition: opacity 1s ease-out;
+}
+.cc-posts .showCC{
+    position: absolute;
     opacity: 1;
 }
 .comments-container .cc-actions {

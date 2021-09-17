@@ -50,9 +50,23 @@
             </div>
             <div class="slide-content">
                 <div class="slide-post-content">
+                    <div class="slide-post-content-information">
+                        <div class="texts-slide-i">
+                            <p>Novos produtos</p>
+                            <h1><strong>Instrumentos</strong><br>Profisionais</h1>
+                            <a href="#">Confira</a>
+                        </div>
+                    </div>
                     <img src="../assets/images/musical-background-2886886_1920.jpg" alt="" class="slide-image-bg">
                 </div>
                 <div class="slide-post-content">
+                    <div class="slide-right slide-post-content-information">
+                        <div class="texts-slide-i">
+                            <p>Novos produtos</p>
+                            <h1><strong>Instrumentos</strong><br>Profisionais</h1>
+                            <a href="#">Confira</a>
+                        </div>
+                    </div>
                     <img src="../assets/images/musician-349790_1920.jpg" alt="" class="slide-image-bg">
                 </div>
             </div>
@@ -270,27 +284,77 @@ export default {
 
 .slideshow-container {
     display: flex;
+    position: relative;
     justify-content: center;
     width: 100%;
     height: 504px;
-    box-sizing: border-box;
     overflow: hidden;
+}
+.slide-post-content .slide-post-content-information {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    height: 504px;
+    padding: 8vmax 0 0 7vmax;
+    color: #fff;
+    text-transform: uppercase;
+    background: linear-gradient(to right, rgb(14, 65, 88), transparent);
+}
+.slide-post-content .slide-right {
+    align-items: flex-end;
+    padding: 8vmax 0 0 0;
+    background: linear-gradient(to left, rgb(72, 88, 14), transparent);
+}
+.slide-post-content .slide-right .texts-slide-i {
+    margin-right: 7vmax;
+}
+.slide-post-content .slide-post-content-information .texts-slide-i p{
+    font-size: 16px;
+    font-weight: normal;
+    letter-spacing: 0.4em;
+}
+.slide-post-content .slide-post-content-information .texts-slide-i h1{
+    font-size: 41px;
+    font-weight: 300;
+    letter-spacing: 0.09em;
+    margin: 2vmax 0;
+}
+.slide-post-content .slide-post-content-information .texts-slide-i strong{
+    font-size: 41px;
+    font-weight: bold;
+    letter-spacing: 0.12em;
+}
+.slide-post-content .slide-post-content-information .texts-slide-i a{
+    height: 31px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: normal;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #fff;
+    cursor: pointer;
+}
+.slideshow-container .slide-post-content {
+    transition: opacity 400ms ease-in-out;
+    position: absolute;
+    opacity: 0;
+}
+.slideshow-container .show {
+    position: static;
+    opacity: 1;
 }
 .slide-image-bg {
     width: 100%;
 }
-.slide-post-content {
-    display: none;
-}
-.show {
-    display: block;
-}
 .slideshow-actions {
-    width: 97%;
     height: 504px;
     display: flex;
-    position: absolute;
+    position: static;
     align-items: center;
+    z-index: 3;
 }
 .slideshow-actions i {
     font-size: 50px;
@@ -299,11 +363,11 @@ export default {
 }
 .btn-prev {
     position: absolute;
-    left: 0;
+    left: 2vmax;
 }
 .btn-next {
     position: absolute;
-    right: 0;
+    right: 2vmax;
 }
 .btn-active {
     display: none;

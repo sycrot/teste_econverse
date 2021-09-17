@@ -76,6 +76,9 @@ export default {
 }
 .ad-container .ad-container-info {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     z-index: 10;
 }
@@ -87,10 +90,10 @@ export default {
     letter-spacing: 0.4em;
 }
 .ad-container-info .i-line-w {
-    width: 18px;
+    width: 20px;
     height: 1px;
     background-color: #fff;
-    margin: 2vmax 0;
+    margin: 1.8vmax 0;
 }
 .ad-container-info h1 {
     color: #fff;
@@ -110,6 +113,10 @@ export default {
     margin-top: 2vmax;
     cursor: pointer;
 }
+.ad-container-info .btn-check:hover {
+    color: #222222;
+    background: #fff;
+}
 .ad-container img {
     width: 100vw;
     height: 100vh;
@@ -128,7 +135,8 @@ export default {
     justify-content: space-between;
     align-items: center;
 }
-.department {
+.departments-container .department {
+    cursor: pointer;
     text-align: center;
 }
 .department p {
@@ -143,5 +151,8 @@ export default {
     height: 106px;
     border-radius: 50%;
     filter: contrast(30%);
+}
+.options-department .department:hover img{
+    filter: contrast(100%);
 }
 </style>
