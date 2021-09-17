@@ -3,27 +3,39 @@
     <div class="options-department">
         <div class="departments-container">
             <div class="department">
-                <img src="../assets/images/guitarra-opt.jpg" alt="Guitarra">
+                <div class="depart-img-container">
+                    <img src="../assets/images/guitarra-opt.jpg" alt="Guitarra">
+                </div>
                 <p>Guitarras</p>
             </div>
             <div class="department">
-                <img src="../assets/images/microfone-opt.jpg" alt="Microfone">
+                <div class="depart-img-container">
+                    <img src="../assets/images/microfone-opt.jpg" alt="Microfone">
+                </div>
                 <p>Microfones</p>
             </div>
             <div class="department">
-                <img src="../assets/images/mesadesom-opt.jpg" alt="Mesa de Som">
+                <div class="depart-img-container">
+                    <img src="../assets/images/mesadesom-opt.jpg" alt="Mesa de Som">
+                </div>
                 <p>Mesa de som</p>
             </div>
             <div class="department">
-                <img src="../assets/images/teclado-opt.jpg" alt="Teclado">
+                <div class="depart-img-container">
+                    <img src="../assets/images/teclado-opt.jpg" alt="Teclado">
+                </div>
                 <p>Teclados</p>
             </div>
             <div class="department">
-                <img src="../assets/images/violao-opt.jpg" alt="Violao">
+                <div class="depart-img-container">
+                    <img src="../assets/images/violao-opt.jpg" alt="Violao">
+                </div>
                 <p>Violão</p>
             </div>
             <div class="department">
-                <img src="../assets/images/bateria-opt.jpg" alt="Bateria">
+                <div class="depart-img-container">
+                    <img src="../assets/images/bateria-opt.jpg" alt="Bateria">
+                </div>
                 <p>Baterias</p>
             </div>
         </div>
@@ -146,10 +158,15 @@ export default {
     font-size: 14px;
     margin-top: 1vmax;
 }
-.options-department .department img {
+.options-department .department .depart-img-container {
     width: 106px;
     height: 106px;
     border-radius: 50%;
+    overflow: hidden;
+}
+.options-department .department img {
+    width: 170px;
+    height: 100%;
     filter: contrast(30%);
 }
 .options-department .department:hover img{
