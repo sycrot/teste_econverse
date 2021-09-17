@@ -55,11 +55,11 @@
                 <li class="payment-forms-li">
                     <p class="li-title">Formas de pagamento</p>
                     <div class="payment-forms-icons">
-                        <img src="../assets/images/credit_card_visa_payment_method_icon.svg" alt="VISA">
-                        <img src="../assets/images/credit_card_mastercard_payment_method_icon.svg" alt="Mastercard">
-                        <img src="../assets/images/credit_card_americanexpress_payment_method_icon.svg" alt="American Express">
-                        <img src="../assets/images/credit_card_dinersclub_payment_method_icon.svg" alt="Diners Club">
-                        <img src="../assets/images/credit_boleto_payment_method_icon.svg" alt="Boleto icon" style="background-color: #fff;">
+                        <img src="../assets/images/credit_card_visa_payment_method_icon.png" alt="VISA">
+                        <img src="../assets/images/credit_card_mastercard_payment_method_icon.png" alt="Mastercard">
+                        <img src="../assets/images/credit_card_americanexpress_payment_method_icon.png" alt="American Express">
+                        <img src="../assets/images/credit_card_dinersclub_payment_method_icon.png" alt="Diners Club">
+                        <img src="../assets/images/credit_boleto_payment_method_icon.png" alt="Boleto icon" style="background-color: #fff;">
                     </div>
                 </li>
                 <li class="security-icons">
@@ -280,12 +280,13 @@ export default {
     text-decoration: none;
 }
 .payment-forms-li .payment-forms-icons{
-    width: 100px;
+    width: 120px;
 }
 
 .payment-forms-li .payment-forms-icons img {
-    width: 31px;
+    width: 30px;
     cursor: pointer;
+    margin-right: 5px;
 }
 .security-icons img {
     width: 73px;

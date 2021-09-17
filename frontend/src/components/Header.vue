@@ -43,9 +43,6 @@
                 <i class="btn-prev fa fa-chevron-left"></i>
                 <i class="btn-next fa fa-chevron-right"></i>
                 <ul class="act-navigation">
-                    <li class="nvg-btn"></li>
-                    <li class="nvg-btn nvg-btn-active"></li>
-                    <li class="nvg-btn"></li>
                 </ul>
             </div>
             <div class="slide-content">
@@ -81,27 +78,42 @@ export default {
         const slideContent = document.querySelector('.slide-content')
         const btnPrev = document.querySelector('.btn-prev')
         const btnNext = document.querySelector('.btn-next')
+        const actNavigation = document.querySelector('.act-navigation')
+        
         let current = 0
 
         init()
         function init() {
-        var _show = slideContent.querySelectorAll('.show')
+            var _show = slideContent.querySelectorAll('.show')
 
-        Array.prototype.forEach.call(_show, sh => {
-            sh.classList.remove('show')
-        })
-        imagesPosts[0].classList.add('show')
-        btnPrev.classList.remove('btn-active')
-        btnPrev.classList.remove('btn-active')
-
-        if (imagesPosts[0]) {
-            btnPrev.classList.add('btn-active')
-        } else {
+            Array.prototype.forEach.call(_show, sh => {
+                sh.classList.remove('show')
+            })
+            imagesPosts[0].classList.add('show')
             btnPrev.classList.remove('btn-active')
-        }
+            btnPrev.classList.remove('btn-active')
+
+            nvgBtnInit()
+
+            if (imagesPosts[0]) {
+                btnPrev.classList.add('btn-active')
+            } else {
+                btnPrev.classList.remove('btn-active')
+            }
         }
 
         addListeners()
+
+        function nvgBtnInit() {
+            for (var i = 0; i < imagesPosts.length; i++) {
+                let nvgBtn = document.createElement('li')
+                nvgBtn.classList.add('nvg-btn')
+                actNavigation.appendChild(nvgBtn)
+            }
+            const nvgBtnIdent = document.querySelectorAll('.nvg-btn')
+
+            nvgBtnIdent[0].classList.add('nvg-btn-active')
+        }
 
         function addListeners() {
             btnNext.addEventListener('click', showNext)
@@ -134,6 +146,9 @@ export default {
                 btnNext.classList.remove('btn-active')
             }
             slideContent.querySelector('.show').classList.remove('show')
+            const nvgBtn = document.querySelectorAll('.nvg-btn')
+            actNavigation.querySelector('.nvg-btn-active').classList.remove('nvg-btn-active')
+            nvgBtn[slide].classList.add('nvg-btn-active')
             imagesPosts[slide].classList.add('show')
         }
     }
@@ -310,6 +325,13 @@ export default {
 .slide-post-content .slide-right .texts-slide-i {
     margin-right: 7vmax;
 }
+.slide-post-content .slide-post-content-information .texts-slide-i {
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+.slideshow-container .show .slide-post-content-information .texts-slide-i {
+    opacity: 1;
+}
 .slide-post-content .slide-post-content-information .texts-slide-i p{
     font-size: 16px;
     font-weight: normal;
@@ -390,7 +412,7 @@ export default {
     margin: 0 0.5vmax;
     cursor: pointer;
 }
-.act-navigation .nvg-btn .nvg-btn-active {
-    background: #fff;
+.act-navigation .nvg-btn-active {
+    background-color: #fff;
 }
 </style>
