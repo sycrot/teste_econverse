@@ -21,7 +21,7 @@
                 <p>Olá, visitante<small><a href="#">Minha conta</a></small></p>
             </div>
             <div class="header-cart">
-                <i class="fa fa-shopping-bag"></i>
+                <i><ion-icon name="bag-outline"></ion-icon></i>
                 <small>Seu Carrinho</small>
                 <p>0 item (s)</p>
             </div>
@@ -256,13 +256,14 @@ export default {
     flex-direction: column;
     text-align: center;
     padding: 0 1vmax;
-
+    cursor: pointer;
     background-color: #041E50;
     color: #fff;
 }
-.header-cart i {
-    font-size: 22px;
-    margin-top: 55px;
+.header-cart ion-icon{
+    color: #fff; 
+    font-size: 30px;
+    margin-top: 45px;
 }
 .header-cart small {
     font-size: 10px;
