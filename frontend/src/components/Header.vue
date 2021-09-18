@@ -72,9 +72,21 @@
 </template>
 
 <script>
+import Carousel from '../assets/js/Carousel'
 export default {
+    dasta: function(){
+        return {
+            
+        }
+    },
     mounted() {
         const imagesPosts = document.querySelectorAll('.slide-post-content')
+        const slideContent = document.querySelector('.slide-content')
+        const btnPrev = document.querySelector('.btn-prev')
+        const btnNext = document.querySelector('.btn-next')
+        const actNavigation = document.querySelector('.act-navigation')
+        Carousel(imagesPosts, slideContent, btnPrev, btnNext, 'header', actNavigation)
+        /* const imagesPosts = document.querySelectorAll('.slide-post-content')
         const slideContent = document.querySelector('.slide-content')
         const btnPrev = document.querySelector('.btn-prev')
         const btnNext = document.querySelector('.btn-next')
@@ -149,7 +161,7 @@ export default {
             actNavigation.querySelector('.nvg-btn-active').classList.remove('nvg-btn-active')
             nvgBtn[slide].classList.add('nvg-btn-active')
             imagesPosts[slide].classList.add('show')
-        }
+        } */
     }
 }
 </script>

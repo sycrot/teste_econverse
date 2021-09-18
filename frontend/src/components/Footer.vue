@@ -96,6 +96,7 @@
 </template>
 
 <script>
+import Carousel from '../assets/js/Carousel'
 export default {
     mounted() {
         const commentsPosts = document.querySelectorAll('.cc-post-content')
@@ -103,8 +104,8 @@ export default {
         const btnPrevCC = document.querySelector('.cc-actions .btn-prev')
         const btnNextCC = document.querySelector('.cc-actions .btn-next')
 
-
-        let currentCC = 0
+        Carousel(commentsPosts, commentsContentPosts, btnPrevCC, btnNextCC)
+        /* let currentCC = 0
 
         init()
         function init() {
@@ -158,7 +159,7 @@ export default {
             }
             commentsContentPosts.querySelector('.showCC').classList.remove('showCC')
             commentsPosts[slide].classList.add('showCC')
-        }
+        } */
     }
 }
 </script>
@@ -196,7 +197,7 @@ export default {
     position: absolute;
     transition: opacity 1s ease-out;
 }
-.cc-posts .showCC{
+.cc-posts .show{
     position: absolute;
     opacity: 1;
 }
